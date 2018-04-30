@@ -20,7 +20,7 @@
                       
 #More information
 
-* The documentation provides detailed information about building from source, architecture, extending Ark, and more.
+* https://heptio.github.io/ark/ provides detailed information about building from source, architecture, extending Ark, and more.
 
 
 
