@@ -1,9 +1,9 @@
-# Heptio Ark
+#About Heptio Ark
+* Heptio Ark provides customizable degrees of recovery for all Kubernetes objects (Pods, Deployments, Jobs, Custom Resource Definitions, etc.), as well as for persistent volumes. This recovery can be cluster-wide, or fine-tuned according to object type, namespace, or labels.
 
-Heptio Ark enables the ability to take backups of EBS volumes on a configurable
-schedule. These backups can be given a TTL to help save costs.
+* Ark is ideal for the disaster recovery use case, as well as for snapshotting your application state, prior to performing system operations on your cluster (e.g. upgrades).
 
-# Release History
+# Chart Release History
 
 ## 1.0.0 (April 29 2018)
 
