@@ -6,7 +6,7 @@
 
 # Heptio-Ark server
 
-* This helm chart install ark-server version v0.8.1
+* This helm chart installs Heptio-ark version v0.8.1
 
 
 #To set up Ark on AWS, :
