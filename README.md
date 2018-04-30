@@ -9,9 +9,9 @@ schedule. These backups can be given a TTL to help save costs.
 
 * Initial release.
 
-#To set up Ark on AWS, you:
+#To set up Ark on AWS, :
 
-Create your S3 bucket,
-Create an AWS IAM role for Ark,
-Configure the server,
-Add kube2iam annotation in deployment.
+*  Create  S3 bucket,
+*  Create an AWS IAM role for Ark,
+*  Configure the server,
+*  Add kube2iam annotation in deployment.
