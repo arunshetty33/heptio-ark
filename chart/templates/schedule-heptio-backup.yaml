@@ -1,0 +1,36 @@
+{{ if .Values.jenkins.enabled }}
+apiVersion: ark.heptio.com/v1
+kind: Schedule
+metadata:
+  name: {{ .Values.schedule.jenkins.name }}
+  namespace: {{ .Values.namespace.backup.name }}
+spec:
+  schedule: {{ .Values.schedule.jenkins.schedule}}
+  template:
+    includedNamespaces:
+    - {{ .Values.schedule.jenkins.namespace }}
+    includedResources: null
+    labelSelector:
+      matchLabels:
+        app: {{ .Values.schedule.jenkins.label }}
+    snapshotVolumes: true
+    ttl: 720h0m0s
+---
+{{- end -}}
+apiVersion: ark.heptio.com/v1
+kind: Schedule
+metadata:
+  name: {{ .Values.schedule.prometheus.name }}
+  namespace: {{ .Values.namespace.backup.name }}
+spec:
+  schedule: {{ .Values.schedule.prometheus.schedule}}
+  template:
+    includedNamespaces:
+    - {{ .Values.schedule.prometheus.namespace }}
+    includedResources: null
+    labelSelector:
+      matchLabels:
+        app: {{ .Values.schedule.prometheus.label }}
+        prometheus: {{ .Values.schedule.prometheus.label }}
+    snapshotVolumes: true
+    ttl: 720h0m0s

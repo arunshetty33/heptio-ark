@@ -1,0 +1,54 @@
+Name: heptio-ark
+
+configuration:
+  cloudprovider: aws
+  bucket: ark-backups
+  region: us-east-1
+  # following are default values
+  backupSyncPeriod: 30m
+  gcSyncPeriod: 30m
+  scheduleSyncPeriod: 1m
+  restoreOnlyMode: false
+
+namespace:
+  server:
+    create: false
+    name: heptio-ark
+  backup:
+    create: false
+    name: heptio-ark
+
+image:
+  repository: gcr.io/heptio-images/ark
+  tag: v0.8.1
+  pullPolicy: IfNotPresent
+
+rbac:
+  create: true
+
+serviceAccount:
+  hook:
+    create: true
+    name: hook-sa
+  server:
+    create: true
+    name: server-sa
+
+aws:
+  roleName: heptio-ark-backups
+
+#------------------------------
+# values to be taken for scheduling the backups
+# added schedule-heptio-backup.yaml file to include schedule in deployment
+
+schedule:
+  jenkins:
+    name: test1#Name for backup schedule
+    schedule: "0 0 * 0 0"
+    label: #Use label name to take backups
+    namespace: infrastructure
+  prometheus:
+    name: Test2
+    schedule: "0 0 * 0 0"
+    label: prometheus
+    namespace: Application

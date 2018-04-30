@@ -1,0 +1,24 @@
+apiVersion: ark.heptio.com/v1
+kind: Config
+metadata:
+  namespace: {{ .Values.namespace.backup.name }}
+  name: default
+persistentVolumeProvider:
+  name: {{ .Values.configuration.cloudprovider  }}
+  config:
+    {{- if eq .Values.configuration.cloudprovider "gcp" }}
+    project: {{ .Values.configuration.project  }}
+    {{- else if eq .Values.configuration.cloudprovider "aws" }}
+    region: {{ .Values.configuration.region  }}
+    {{- end }}
+backupStorageProvider:
+  name: {{ .Values.configuration.cloudprovider  }}
+  bucket: {{ template "common.ark-s3bucket" . }}
+  {{- if eq .Values.configuration.cloudprovider "aws" }}
+  config:
+    region: {{ .Values.configuration.region  }}
+  {{- end }}
+backupSyncPeriod: {{ .Values.configuration.backupSyncPeriod }}
+gcSyncPeriod: {{ .Values.configuration.gcSyncPeriod }}
+scheduleSyncPeriod: {{ .Values.configuration.scheduleSyncPeriod }}
+restoreOnlyMode: {{ .Values.configuration.restoreOnlyMode }}

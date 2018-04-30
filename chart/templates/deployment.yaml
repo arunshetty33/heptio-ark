@@ -1,0 +1,38 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace.server.name }}
+  name: {{ template "ark-server.fullname" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: ark
+      release: {{ .Release.Name }}
+      app: {{ template "ark-server.name" . }}
+  template:
+    metadata:
+      labels:
+        component: ark
+        release: {{ .Release.Name }}
+        app: {{ template "ark-server.name" . }}
+      annotations:
+        iam.amazonaws.com/role: "{{ template "common.kube2iam-role" . }}"
+    spec:
+      restartPolicy: Always
+      serviceAccountName: {{ template "ark-server.sa" . }}
+      containers:
+        - name: ark
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          command:
+            - /ark
+          args:
+            - server
+            - --namespace
+            - {{ .Values.namespace.backup.name }}
+          volumeMounts:
+            - name: plugins
+              mountPath: /plugins
+      volumes:
+        - name: plugins
+          emptyDir: {}
