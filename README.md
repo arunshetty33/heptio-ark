@@ -4,15 +4,16 @@
 
 * Ark is ideal for the disaster recovery use case, as well as for snapshotting your application state, prior to performing system operations on your cluster (e.g. upgrades).
 
-#Release History
+# Heptio-Ark server
 
-## 1.0.0 (April 29 2018)
+* This helm chart install ark-server version v0.8.1
 
-* Initial release.
 
 #To set up Ark on AWS, :
 
 *  Create  S3 bucket,
 *  Create an AWS IAM role for Ark,
 *  Configure the server,
-*  Add kube2iam annotation in deployment.
+*  Add kube2iam annotation in deployment
+*               annotations:
+                      iam.amazonaws.com/role: "{{ template "common.kube2iam-role" . }}"
