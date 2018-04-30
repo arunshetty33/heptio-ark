@@ -15,9 +15,10 @@
 *  Create an AWS IAM role for Ark,
 *  Configure the server,
 *  Add kube2iam annotation in deployment
-               annotations:
+ ```
+              annotations:
                       iam.amazonaws.com/role: "{{ template "common.kube2iam-role" . }}"
-                      
+ ```                     
 #More information
 
 * https://heptio.github.io/ark/ provides detailed information about building from source, architecture, extending Ark, and more.
